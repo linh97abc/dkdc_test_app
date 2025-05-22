@@ -1,0 +1,105 @@
+﻿<ui:UiWindow x:Class="dkdc_test.MainWindow"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dkdc_test"
+        mc:Ignorable="d"
+             
+                     xmlns:layout="clr-namespace:dkdc_test.Components.layout"
+             
+               Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowBackdropType="Mica"
+        WindowCornerPreference="Round"
+        Loaded="UiWindow_Loaded"
+        
+        Title="DkdcTest"
+             Height="840" 
+             Width="1280"
+             MinWidth="1240"
+             MinHeight="820"
+             WindowStartupLocation="CenterScreen"
+             
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="256"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <layout:ChartPanel Grid.RowSpan="2"/>
+            <layout:LogPanel Grid.Column="1" Grid.Row="1"/>
+            <layout:ControlPanel Grid.Column="2" Grid.Row="1"/>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Grid.Column="1" Grid.ColumnSpan="2">
+
+
+                <ComboBox 
+                            Margin="4 4 4 4"
+                            Width="160"
+                            IsEnabled="{Binding IsChecked, ElementName=btnConnect}"
+                            ItemsSource="{Binding SerialPorts}"
+                            SelectedValue="{Binding ComPort}"
+                            />
+
+                <ToggleButton
+                      
+                              x:Name="btnConnect"
+                              Click="ButtonConnect_Click"
+                              Margin="4 0 0 0"
+                              HorizontalAlignment="Center"
+                              IsChecked="True"
+                              IsEnabled="False"
+                              Content="{Binding RelativeSource={RelativeSource Self}, Path= IsChecked, Converter={StaticResource connectSttToBtnStr}}"
+                              Width="100" />
+
+
+                
+            </StackPanel>
+        </Grid>
+        
+        <ui:TitleBar
+            
+            Title="Dkdc Test"
+            x:Name="RootTitleBar"
+            
+            Grid.Row="0"
+            ForceShutdown="False"
+            MinimizeToTray="False"
+            ShowHelp="False"
+            UseSnapLayout="True">
+            <ui:TitleBar.Header>
+                <StackPanel
+                    Background="Transparent"
+                    Margin="0,0,12,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <ui:Button 
+                        Margin="2"
+                        Icon="DarkTheme24"
+                               Click="NavigationButtonTheme_OnClick"
+                               ToolTip="Đổi giao diện sáng/tối"
+                               />
+                </StackPanel>
+            </ui:TitleBar.Header>
+        </ui:TitleBar>
+    </Grid>
+</ui:UiWindow>
