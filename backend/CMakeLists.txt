@@ -13,3 +13,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
         ipc_message
 )
+
+# build msvc static runtime
+if (MSVC)
+    set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()

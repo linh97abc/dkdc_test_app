@@ -79,7 +79,7 @@ class TestApplication
         std::string logMessage("Test log message from backend. Count: ");
         while (true)
         {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
             // Here you can add logic to update logs
             ipcServer.PushLogData(logMessage + std::to_string(count++));
         }

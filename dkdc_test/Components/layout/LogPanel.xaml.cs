@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Rendering;
+
 namespace dkdc_test.Components.layout
 {
     /// <summary>
@@ -23,23 +26,54 @@ namespace dkdc_test.Components.layout
         public LogPanel()
         {
             InitializeComponent();
-            Services.ServiceProvider.Inst.IpcService.OnNewLog += (string line) => {
+            Services.ServiceProvider.Inst.IpcService.OnNewLog += (string line) =>
+            {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    this.AddLog(line);
+                    try
+                    {
+                        this.AddLog(line);
+
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
                 });
-                
+
             };
         }
 
         void AddLog(string line)
         {
+
+            var lastVisibleLine = editor.TextArea.TextView.VisualLines.LastOrDefault();
+            int totalLines = editor.Document.LineCount;
+            int lastVisibleLineNumber = lastVisibleLine?.LastDocumentLine?.LineNumber ?? 0;
+            bool isAtBottom = lastVisibleLineNumber >= totalLines - 1;
+
+
+
             if (editor.Text.Length > 0)
             {
                 editor.Text += "\n";
             }
             editor.Text += line;
-            editor.ScrollToEnd();
+
+            if (isAtBottom)
+            {
+                editor.ScrollToEnd();
+
+            }
+
+            // Only scroll to end if caret is at the last line
+            //int caretLine = editor.GetLineIndexFromCharacterIndex(editor.CaretIndex);
+            //int lastLine = editor.LineCount - 1;
+            //if (caretLine == lastLine)
+            //{
+            //    editor.ScrollToEnd();
+            //}
         }
 
         void ClearLog()
