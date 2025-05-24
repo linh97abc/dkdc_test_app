@@ -30,6 +30,13 @@ namespace dkdc_test.Services
             this.ipcClient.OnMsgHandler += IpcClient_OnMsgHandler;
             this.ipcClient.OnDisconnect += IpcClient_OnDisconnect;
 
+            
+        }
+
+        public void Start()
+        {
+            // This method is called to start the IPC client connection.
+            // The connection is established in the constructor, so this method can be empty.
             Task.Run(async () => await this.ipcClient.TaskClientConnect());
         }
 

@@ -1,0 +1,3 @@
+dkdc_ipc.OpenPort.port max_size:128
+dkdc_ipc.LogData.log max_size:1300
+dkdc_ipc.ChartData.data max_count:8

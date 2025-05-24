@@ -103,7 +103,7 @@ namespace dkdc_test
                 }
             };
 
-
+            Services.ServiceProvider.Inst.IpcService.Start();
 
 
         }

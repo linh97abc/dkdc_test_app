@@ -23,7 +23,13 @@ namespace dkdc_test.Components.layout
         public LogPanel()
         {
             InitializeComponent();
-            Services.ServiceProvider.Inst.IpcService.OnNewLog += (string line) => { this.AddLog(line); };
+            Services.ServiceProvider.Inst.IpcService.OnNewLog += (string line) => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    this.AddLog(line);
+                });
+                
+            };
         }
 
         void AddLog(string line)
