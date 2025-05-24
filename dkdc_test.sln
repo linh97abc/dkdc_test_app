@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dkdc_test", "dkdc_test\dkdc_test.csproj", "{E149AB77-0E08-4927-BE3C-2660FB4960C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPCMessage", "IPCMessage\IPCMessage.csproj", "{282E6A21-583F-4FF9-8245-A1D0CB2EF9E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E149AB77-0E08-4927-BE3C-2660FB4960C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E149AB77-0E08-4927-BE3C-2660FB4960C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E149AB77-0E08-4927-BE3C-2660FB4960C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282E6A21-583F-4FF9-8245-A1D0CB2EF9E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282E6A21-583F-4FF9-8245-A1D0CB2EF9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282E6A21-583F-4FF9-8245-A1D0CB2EF9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282E6A21-583F-4FF9-8245-A1D0CB2EF9E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

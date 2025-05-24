@@ -1,0 +1,177 @@
+syntax = "proto3";
+
+message OpenComPortRequest {
+  string name = 1;
+  int32 baudrate = 2;
+  uint32 monFreq = 3; 
+}
+
+message OpenComPortResponse {
+  bool success = 1;
+}
+
+message CloseComPortRequest {
+}
+
+message CloseComPortResponse {
+  bool success = 1;
+}
+
+message SetLogPathRequest {
+  bool is_enable = 1;
+  string path = 2;
+}
+
+message SetLogPathResponse {
+  bool success = 1;
+}
+
+//
+
+
+message StartAutoRunRequest {
+  enum ControlType {
+    SIN = 0;
+    PULSE = 1;
+    RAMP_UP = 2;
+    RAMP_DOWN = 3;
+    RAMP_BOTH = 4;
+  }
+
+  float ampli = 1;
+  float data_freq = 2;
+  float control_freq = 3;
+  ControlType type = 4;
+}
+
+message StartAutoRunResponse {
+  bool success = 1;
+}
+
+message StopAutoRunRequest {
+}
+
+message StopAutoRunResponse {
+  bool success = 1;
+}
+
+message WritePostionRequest {
+  float pos = 1;
+}
+
+message WritePostionResponse {
+  bool success = 1;
+}
+
+
+message ResetSPRequest {
+}
+
+message ResetSPResponse {
+  bool success = 1;
+}
+
+message GasLimitRequest {
+  uint32 value = 1;
+}
+
+message GasLimitResponse {
+  bool success = 1;
+}
+
+message UnFoldWingRequest {
+
+}
+
+message UnFoldWingResponse {
+  bool success = 1;
+}
+
+message FoldWingRequest {
+
+}
+
+message FoldWingResponse {
+  bool success = 1;
+}
+
+
+
+// status
+message PositionData {
+  
+  float sp = 1;
+  float pv = 2;
+}
+
+message DeviceStatus {
+  bool connected = 1;
+  float voltage = 2;
+  float current = 3;
+}
+
+message LogSerialMsg {
+  uint32 timestamp = 1;
+  uint32 cmd = 2;
+  uint32 arg = 3;
+  bool is_request = 4;
+  string name = 5;
+}
+
+message LogBackendMsg {
+  uint32 timestamp = 1;
+  string msg = 2;
+}
+
+message ExceptionMsg {
+  string msg = 1;
+}
+
+message AppMesseageRequest
+{
+    oneof cmd
+    {
+        OpenComPortRequest openCom = 1;
+        CloseComPortRequest closeCom = 3;
+        SetLogPathRequest setLog = 5;
+
+        StartAutoRunRequest startAutoRun = 7;
+        WritePostionRequest writePos = 9;
+        ResetSPRequest resetSP = 11;
+
+        StopAutoRunRequest stopAutoRun = 13;
+
+        GasLimitRequest gasLimit = 14;
+        UnFoldWingRequest unFoldWing = 15;
+        FoldWingRequest foldWing = 16;
+    }
+}
+
+message AppMesseageResponse
+{
+    oneof cmd
+    {
+
+        OpenComPortResponse openComRes = 2;
+        CloseComPortResponse closeComRes = 4;
+        SetLogPathResponse setLogRes = 6;
+
+        StartAutoRunResponse startAutoRunRes = 8;
+        WritePostionResponse writePosRes = 10;
+        ResetSPResponse resetSPRes = 12;
+
+        PositionData posData = 13;
+        DeviceStatus devStatus = 14;
+
+        LogSerialMsg logSerialData = 15;
+        LogBackendMsg logBackendMsg = 16;
+
+        StopAutoRunResponse stopAutoRunRes = 17;
+
+        ExceptionMsg exceptMsg = 18;
+
+        GasLimitResponse gasLimit = 19;
+        UnFoldWingResponse unFoldWing = 20;
+        FoldWingResponse foldWing = 21;
+    }
+}

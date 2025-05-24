@@ -114,8 +114,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\Converter\BoolToPrimaryString.cs" />
+    <Compile Include="Components\utils\CustomAxisLimitManager.cs" />
+    <Compile Include="Components\utils\Plot.cs" />
+    <Compile Include="Components\utils\TextBoxInput.cs" />
+    <Compile Include="Services\GUIService.cs" />
+    <Compile Include="Services\IpcService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
     <Compile Include="Store\AppBusiness.cs" />
+    <Compile Include="Store\ChartViewModel.cs" />
+    <Compile Include="Store\DataLoggerPlotModel.cs" />
+    <Compile Include="Store\InputDataModel.cs" />
     <Page Include="Components\layout\ChartPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,6 +198,12 @@
     <Folder Include="Pages\" />
     <Folder Include="Routes\" />
     <Folder Include="Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IPCMessage\IPCMessage.csproj">
+      <Project>{282e6a21-583f-4ff9-8245-a1d0cb2ef9e7}</Project>
+      <Name>IPCMessage</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\HarfBuzzSharp.NativeAssets.macOS.7.3.0.3\build\net462\HarfBuzzSharp.NativeAssets.macOS.targets" Condition="Exists('..\packages\HarfBuzzSharp.NativeAssets.macOS.7.3.0.3\build\net462\HarfBuzzSharp.NativeAssets.macOS.targets')" />

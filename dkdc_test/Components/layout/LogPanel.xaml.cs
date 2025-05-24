@@ -23,7 +23,32 @@ namespace dkdc_test.Components.layout
         public LogPanel()
         {
             InitializeComponent();
-            editor.Text = "ljksdfjlksdjfkl\nasdjflsjkdhflsd\nsdifsdikfjsd\nedfjk sdfjls sdifjlskdjf";
+            Services.ServiceProvider.Inst.IpcService.OnNewLog += (string line) => { this.AddLog(line); };
+        }
+
+        void AddLog(string line)
+        {
+            if (editor.Text.Length > 0)
+            {
+                editor.Text += "\n";
+            }
+            editor.Text += line;
+            editor.ScrollToEnd();
+        }
+
+        void ClearLog()
+        {
+            editor.Text = string.Empty;
+        }
+
+        private void Button_ClearLog_Click(object sender, RoutedEventArgs e)
+        {
+            ClearLog();
+        }
+
+        private void Button_ScrollLog_Click(object sender, RoutedEventArgs e)
+        {
+            editor.ScrollToEnd();
         }
     }
 }

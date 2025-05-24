@@ -54,7 +54,16 @@ namespace dkdc_test
             this._serialPorts = new ObservableCollection<string>();
             this.DataContext = this;
             InitializeComponent();
+
+            Services.ServiceProvider.Inst.GUIService.RootDialog = this.RootDialog;
+            Services.ServiceProvider.Inst.GUIService.RootSnackBar = this.RootSnackbar;
+
             Wpf.Ui.Appearance.Watcher.Watch(this);
+        }
+
+        private void RootDialog_ButtonLeftClick(object sender, RoutedEventArgs e)
+        {
+            (sender as Wpf.Ui.Controls.Dialog).Hide();
         }
 
         private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
@@ -165,7 +174,18 @@ namespace dkdc_test
 
         private async void ButtonConnect_Click(object sender, RoutedEventArgs e)
         {
+            var appbusiness = Services.ServiceProvider.Inst.AppBusiness;
 
+            if(appbusiness.IsSerialOpen)
+            {
+                await appbusiness.Disconnect();
+                
+            }
+            else
+            {
+                await appbusiness.Connect(this.comport);
+                
+            }
         }
 
     }

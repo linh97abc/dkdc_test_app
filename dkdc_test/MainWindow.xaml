@@ -42,18 +42,25 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <layout:ChartPanel Grid.RowSpan="2"/>
-            <layout:LogPanel Grid.Column="1" Grid.Row="1"/>
-            <layout:ControlPanel Grid.Column="2" Grid.Row="1"/>
+            <layout:ChartPanel
+                
+                Margin="16 0 4 16"
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                />
+            <layout:LogPanel Margin="0 8 0 16" Grid.Column="1" Grid.RowSpan="2"/>
+            <layout:ControlPanel Margin="16 4 16 16" Grid.Column="2" Grid.Row="1"/>
 
             <StackPanel
                 Orientation="Horizontal"
-                Grid.Column="1" Grid.ColumnSpan="2">
+                Grid.Column="2">
 
+                <!--<Label VerticalAlignment="Center">COM Port</Label>-->
 
                 <ComboBox 
                             Margin="4 4 4 4"
-                            Width="160"
+                            Width="130"
                             IsEnabled="{Binding IsChecked, ElementName=btnConnect}"
                             ItemsSource="{Binding SerialPorts}"
                             SelectedValue="{Binding ComPort}"
@@ -74,7 +81,29 @@
                 
             </StackPanel>
         </Grid>
-        
+
+        <ui:Snackbar
+                        x:Name="RootSnackbar"
+                        Title="Hello World!"
+                        Grid.Row="1"
+                        MaxWidth="600"
+                        Appearance="Secondary"
+                        CloseButtonEnabled="True"
+                        Icon="PuzzlePiece24"
+                        Timeout="5000" />
+
+        <ui:Dialog
+            x:Name="RootDialog"
+            Title="Servo Test"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            DialogHeight="260"
+            
+            ButtonRightClick="RootDialog_ButtonLeftClick"
+            ButtonLeftVisibility="Hidden"
+            ButtonRightName="OK" 
+            />
+
         <ui:TitleBar
             
             Title="Dkdc Test"

@@ -15,6 +15,12 @@ using System.Windows.Shapes;
 
 namespace dkdc_test.Components.layout
 {
+    enum ButtonID {
+        ReadPID = 1,
+        SavePid = 2,
+        
+    }
+
     /// <summary>
     /// Interaction logic for ControlPanel.xaml
     /// </summary>
@@ -23,6 +29,17 @@ namespace dkdc_test.Components.layout
         public ControlPanel()
         {
             InitializeComponent();
+            this.DataContext = Services.ServiceProvider.Inst;
+        }
+
+        private async void  Button_ReadPID_Click(object sender, RoutedEventArgs e)
+        {
+            await Services.ServiceProvider.Inst.IpcService.NotifyEventBtnClick((uint)ButtonID.ReadPID);
+        }
+
+        private async void Button_SavePid_Click(object sender, RoutedEventArgs e)
+        {
+            await Services.ServiceProvider.Inst.IpcService.NotifyEventBtnClick((uint)ButtonID.SavePid);
         }
     }
 }

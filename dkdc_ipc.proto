@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package dkdc_ipc;
+
+message OpenPort
+{
+    string port = 1; // Port to open
+}
+
+message ClosePort
+{
+    
+}
+
+message ButtonClick
+{
+    uint32 buttonId = 1; // ID of the button that was clicked
+}
+
+message QueryInput
+{
+    uint32 inputId = 1; // ID of the input to query
+}
+
+message InputData
+{
+    uint32 inputId = 1; // ID of the input
+    double value = 2; // Value of the input (true/false)
+}
+
+message ChartData
+{
+    repeated float data = 1; // Chart data to be posted
+}
+
+message LogData
+{
+    uint32 timestamp_ms = 1; // Timestamp in milliseconds
+    string log = 2; // Log data to be sent
+}
+
+
+message NotifyData
+{
+    enum NotifyType
+    {
+        ERROR = 0; // Error notification
+        INFO = 1; // Informational notification
+        WARNING = 2; // Warning notification
+        SUCCESS = 3; // Success notification
+        EXCEPTION = 4; // Exception notification
+    }
+
+    NotifyType type = 1; // Type of notification
+    string title = 2; // Title of the error message
+    string message = 3; // Error message to be sent
+}
+
+message FrontendToBackendMessage
+{
+    oneof cmd
+    {
+        OpenPort openPort = 1; // Send to backend to open Serial port
+        ClosePort closePort = 2; // Send to backend to close Serial port
+        ButtonClick buttonClick = 3; // Send to backend when a button is clicked
+        InputData inputData = 4; // Reponse for QueryInput Message 
+    }
+}
+
+message BackendToFrontendMessage
+{
+    oneof cmd
+    {
+        ClosePort closePort = 21; // Send to frontend if Serial port is closed
+        NotifyData notifyData = 22; // Notification data to be sent
+
+        QueryInput queryInput = 3; // Request to query input data
+        ChartData chartData = 4; // Chart data to be posted
+        LogData logData = 5; // Log data to be sent
+        InputData inputData = 6; // Message to Update input field
+    }
+}

@@ -9,13 +9,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <avalonEdit:TextEditor Name="editor"
-                                           Background="{DynamicResource ApplicationBackgroundBrush}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
+            <ui:Button Icon="Eraser24" Click="Button_ClearLog_Click">
+                Xóa Log
+            </ui:Button>
+
+            <ui:Button Icon="ArrowDown24" Click="Button_ScrollLog_Click">
+                Cuộn xuống cuối
+            </ui:Button>
+        </StackPanel>
+        
+        <Border
+            Grid.Row="1"
+            CornerRadius="8" Background="{DynamicResource ApplicationBackgroundBrush}" >
+
+            <avalonEdit:TextEditor Margin="4" Name="editor"
+                               Background="Transparent"            
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        IsReadOnly="True"
                        ShowLineNumbers="True"
                        FontFamily="Consolas"
                        FontSize="14"
                        SyntaxHighlighting="None" />
+        </Border>
     </Grid>
 </UserControl>
